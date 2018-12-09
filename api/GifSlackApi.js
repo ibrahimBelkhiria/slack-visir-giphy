@@ -24,8 +24,17 @@ router.post('/',(req,res)=>{
         requestedGifUrl =result.data.data.image_url;
         // check if there is a result 
         if(requestedGifUrl){
-            
-             res.send(requestedGifUrl);
+            // take a look at https://api.slack.com/docs/message-attachments to see the full format for the response    
+             res.json({
+                "text": `You asked a gif for ${req.body.text}`,
+                "attachments": [
+                    {
+                        "text":"check this Gif ",
+                        "image_url": requestedGifUrl,
+                    }
+                ]
+            });
+             
         }else{
             res.send("Choisir un nom de sujet un peu plus significative s'il vous plait");
         }
